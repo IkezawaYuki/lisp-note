@@ -147,3 +147,38 @@ PORK
 #### List関数は長いリストを一度に作ることができる
 
 #### cadr ２番目以降の１番目
+
+#### 条件式の評価において空のリストを偽として扱うこと
+```
+> (if '()
+      'i-am-true
+      'i-am-false)
+> (if '(1)
+      'i-am-true
+      'i-am-false)
+```
+
+```
+リストを食べる関数の代表
+> (defun my-length (list)
+   (if list
+       (1+ (my-length (cdr list)))
+        0))
+
+> (my-length '(list with four symbols))
+```
+
+```
+1: (eq '() nil) ==> T
+2: (eq '() ()) ==> T
+3: (eq '() 'nil) ==> T
+
+```
+
+#### ifの持つ二つの式のうち、どちらか一方だけが実際に評価される。
+
+#### 
+
+
+
+
