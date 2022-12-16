@@ -177,8 +177,33 @@ PORK
 
 #### ifの持つ二つの式のうち、どちらか一方だけが実際に評価される。
 
-#### 
+#### prognという特別なコマンドを使って、一つの式の中に余分なコマンドを押し込むことができる。
+```
+> (defvar *number-was-odd* nil)
 
+> (if (oddp 5)
+      (progn (setf *number-was-odd* t)
+              'odd-number)
+      'even-number)
+```
 
+#### 暗黙のprogn。whenとunless
+```
+> (defvar *number-is-odd* nil)
+> (when (oddp 5)
+    (setf *number-is-odd* t)
+    'odd-number)
 
+> (unless (oddp 4)
+    (setf *number-is-odd* nil)
+    'even-number)
+```
 
+#### when は条件が真の時に囲まれた式を全て実行する。
+
+#### unlessは条件が偽の時に囲まれた式を全て実行する。
+
+#### 万能条件コマンドcond
+#### condの本体はいくつも重なった括弧を使って、それぞれの条件を分けている。括弧で分けられた各分岐について、その最初の式がその分岐を選ぶかどうかを決める条件になる。
+
+#### caseによる分岐
