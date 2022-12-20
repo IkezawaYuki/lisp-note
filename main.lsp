@@ -24,14 +24,16 @@
 (defun describe-paths (location edges)
   (apply #'append (mapcar #'describe-path (cdr (assoc location edges)))))
 
-```
-> (cdr (assoc 'living-room *edges*))
-((GARDEN WEST DOOR) (ATTIC UPSTAIRS LADDER))
-```
 
-```
-> (mapcar #'describe-path '((GARDEN WEST DOOR) (ATTIC UPSTAIRS LADDER)))
-((THERE IS A DOOR GOING WEST FROM HERE.) (THERE IS A LADDER GOING UPSTAIRS FROM HERE.))
-```
+(defparameter *objects* '(whiskey bucket frog chain))
 
 
+(defparameter *object-locations* '((whiskey living-room)
+                                   (bucket living-room)
+                                   (chain garden)
+                                   (frog garden)))
+
+(defun objects-at (loc objs obj-locs)
+  (labels ((at-loc-p (obj)
+              (eq (cadr (assoc obj obj-locs)) loc)))
+    (remove-if-not #'at-loc-p objs)))

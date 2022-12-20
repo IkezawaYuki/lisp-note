@@ -283,3 +283,38 @@ T
 
 #### mapcarのように他の関数を引数として受け取る関数は、高階関数と呼ばれる
 
+```
+> (mapcar #'car '((foo bar) (baz qux)))
+(FOO BAZ)
+```
+#### \#'はfunctionオペレーターの略記
+```
+> (mapcar (function car) '((foo bar) (baz qux)))
+(FOO BAZ)
+```
+#### Common Lispでは、関数を値として扱う場合にfunctionオペレータを使ってそのことを明示する
+```
+> (let ((car "Honda Civic"))
+    (mapcar #'car '((foo bar) (baz qux))))
+```
+
+```
+> (cdr (assoc 'living-room *edges*))
+((GARDEN WEST DOOR) (ATTIC UPSTAIRS LADDER))
+```
+
+```
+> (mapcar #'describe-path '((GARDEN WEST DOOR) (ATTIC UPSTAIRS LADDER)))
+((THERE IS A DOOR GOING WEST FROM HERE.) (THERE IS A LADDER GOING UPSTAIRS FROM HERE.))
+```
+
+
+#### Common Lispは変数名と函数名を別々に管理している。変数の名前空間と関数の名前空間があると言ってもいい。
+
+#### applyに関数とリストを渡すと、あたかもそのリストの各要素を引数として関数を呼び出したかのように動作する。
+
+```
+applyはネストしたリスト'((mary had)(a)(little lamb))とappendをガムテープでくっつけているようなもの
+> (apply #'append '((mary had)(a)(little lamb)))
+(MARY HAD A LITTLE LAMB)
+```
