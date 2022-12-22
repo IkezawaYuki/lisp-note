@@ -1,3 +1,6 @@
+#|
+  プレイヤーが行くことができる場所
+ |#
 (defparameter *nodes*  '((living-room (you are in the living-room.
                             a wizard is snoring loundly on the couch.))
                          (garden (you are in a beautiful garden.
@@ -8,15 +11,14 @@
 (defun describe-location (location nodes)
   (cadr (assoc location nodes)))
   
+#|
+  場所を行き来する経路
+|#
 (defparameter *edges* '((living-room (garden west door)
                                      (attic upstairs ladder))
                         (garden (living-room east door))
                         (attic (living-room downstairs ladder))))
-#|
-    データの一部に計算された情報を埋め込んで返す機能を準クオートと呼ぶ
-    バッククオートないでコンマ文字を使うと、一部分だけをコードモードに戻せる
-    => アンクオートするという。
-|#
+
 (defun describe-path (edge)
   `(there is a, (caddr edge) going, (cadr edge) from here.))
 
@@ -59,3 +61,15 @@
         (progn (setf *location* (car next))
                (look))
           '(you cannot go that way.))))
+
+
+(defun pickup (object)
+  (cond ((member object
+                  (objects-at *location* *objects* *object-locations*))
+        (push (list object 'body) *object-locations*)
+          `(you are now carrying the ,object))
+        (t '(you cannot get that.))))
+
+
+(defun inventry()
+  (cons 'items- (objects-at 'body *objects* *object-locations*)))
