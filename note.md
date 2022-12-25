@@ -355,5 +355,66 @@ pushを(setf *foo* (cons 7 *foo*))
 "foo"
 "foo"
 
-print関数が、
+print関数が、"foo"を２回出力したわけではなく、最初の"foo"がprintが実際に表示したもので、２番目の"foo"はREPLが返したもの
 ```
+
+#### print関数はそれぞれの引数を別々の行に表示したがprin1は改行しない
+```
+> (progn (prin1 "this")
+         (prin1 "is")
+         (prin1 "a")
+         (prin1 "test"))
+"this""is""a""test"
+```
+#### read関数はLispの動作を一旦止めて、ユーザーがREPLに何かタイプするのを待つ。
+```
+> (defun say-hello ()
+    (print "Please type your name:")
+    (let ((name (read)))
+      (print "Nice to meet you, ")
+      (print name)))
+```
+
+```
+> (defun add-five ()
+    (print "please enter a number:")
+    (let ((num (read)))
+      (print "When I add five I get")
+      (print (+ num 5))))
+```
+
+#### Lispで文字を表したい場合、\#\\を置く
+
+#### CommonLispのシンボルは大文字小文字を区別しないが、区別したい場合は|で囲めば良い。
+
+#### princ関数はLispのあらゆるデータ型をとり、できるだけ人が読みやすい形でそれを表示する。
+
+#### printの良いところは出力したものを後でいつでも「読み戻す」ことが可能な形で表示すること。
+
+#### read-lineは文字と文字意外のことは何一つ知らず、enterキーが押されるまではどんな文字でも粛々と保存する。
+```
+> (defun say-hello ()
+    (princ "Please type your name:")
+    (let ((name (read-line)))
+      (princ "Nice to meet you, ")
+      (princ name)))
+```
+```
+> '(+ 1 2)
+(+ 1 2)
+> (+ 1 2)
+3
+```
+
+```
+> (defparameter *foo* '(+ 1 2))
+*FOO*
+> (eval *foo*)
+```
+
+#### CLISPでは無限ループから抜けるにはCtrl-Cをタイプし、続けて出てくるプロンプトに:aと答えること。
+
+#### concatenateコマンドは文字列を結合する
+
+#### シングルクオートはLispのコマンドquoteの単なる略記。'fooと書くのは(quote foo)と書くのと同じ
+
