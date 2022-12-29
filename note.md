@@ -478,3 +478,21 @@ push関数はListの先頭に要素を追加する。
                           (roof (shingles)
                                 (chimney))))
 ```
+
+#### substitute-ifは与えられたテスト関数の結果によって値を置き換える関数
+
+#### digit-char-p は文字列中の文字が数字かどうかを判定する
+
+#### 値をとってその値が何かの条件を満たすかどうかの真偽を判定する関数はしばしば述語と呼ばれる
+
+#### substitute-ifはリストも処理できる
+```
+> (substitute-if 0 #'oddp '(1 2 3 4 5 6 7 8 9))
+```
+
+#### complementは渡されたものを反対にする関数
+
+#### Common Lispにはsubstitute-if-notという関数もあるが、notで終わっている関数は非推奨
+
+#### 
+
