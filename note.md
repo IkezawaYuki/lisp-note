@@ -494,5 +494,9 @@ push関数はListの先頭に要素を追加する。
 
 #### Common Lispにはsubstitute-if-notという関数もあるが、notで終わっている関数は非推奨
 
-#### 
+#### write-to-string関数において、:pretty引数はキーワード引数の一例
+
+#### mapcはmapcarの変種。mapcarとちがって結果のリストを返さない
+
+#### Lispでは引数を取らない関数がよく使われ、これらの関数は正式には零項(nually)関数と呼ばれる
 
