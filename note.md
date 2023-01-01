@@ -500,3 +500,19 @@ push関数はListの先頭に要素を追加する。
 
 #### Lispでは引数を取らない関数がよく使われ、これらの関数は正式には零項(nually)関数と呼ばれる
 
+```
+> (with-open-file (my-stream
+                 "testfile.txt"
+                 :direction :output
+                 :if-exists :supersede)
+  (princ "Hello File!" my-stream))
+
+:direction引数には:outputが渡され、ファイルを読み込みではなく書き出し用にオープンすることを示す
+:if-exists引数には:supersedeが渡され、同名のファイルが既に存在していた場合は以前の内容を捨てるように指示する。
+```
+
+#### Common Lispのシンボルにはコロンで始まるものがある。キーワード引数の名前もそうでいつでもコロンで始まる。
+```
+> (let ((cigar 5))
+    cigar)
+```

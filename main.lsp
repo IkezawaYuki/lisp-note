@@ -178,4 +178,29 @@
   (ext:shell (concatenate 'string "dot -Tpng -O " fname)))
 
 
+(with-open-file (my-stream
+                 "testfile.txt"
+                 :direction :output
+                 :if-exists :supersede)
+  (princ "Hello File!" my-stream))
+
+
+(defun graph->png (fname nodes edges)
+  (dot->png fname
+            (lambda ()
+              (graph->dot nodes edges))))
+
+(defun uedges->dot (edges)
+  (maplist (lambda (lst)
+              (mapc (lambda (edges)
+                      (unless (assoc (car edges) (cdr lst))
+                        (fresh-line)
+                        (princ (dot-name (caar lst)))
+                        (princ "--")
+                        (princ (dot-name (car edge)))
+                        (princ "[label=\"")
+                        (princ (dot-label (cdr edge)))
+                        (princ "\"];")))
+                      (cdar lst)))
+              edges))
 
