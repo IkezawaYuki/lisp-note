@@ -516,3 +516,16 @@ push関数はListの先頭に要素を追加する。
 > (let ((cigar 5))
     cigar)
 ```
+
+#### maplist関数はmapcar関数と似ているけれど、リスト中の現在の要素だけでなく、リストの残り全てを見ることができる関数
+
+#### 
+```
+> (loop repeat 10
+        collect 1)
+loopコマンドの中で、repeatを使って何回ループするのかを指定し、collectで１回ごとに集めるオブジェクトを指定する。
+
+> (loop for n from 1 to 10
+        collect (+ 100 n))
+```
+
