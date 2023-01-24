@@ -580,8 +580,6 @@ FOO
 > (nth 1 '(foo bar baz))
 BAR
 ```
-
-
 #### 新しいハッシュテーブルは要素をキーと値の組み合わせで格納する。
 
 #### キーを使って要素を取り出すのはgethash関数
@@ -600,4 +598,52 @@ NIL
 25 ;
 T
 
+```
+
+#### round関数を呼ぶと引数を丸めた数が得られるが、その時に丸めの余りも同時に計算される。
+
+#### 自分で作った関数から複数の値を返すにはvaluesを使う。
+
+#### multiple-value-bindを使うと、通常なら捨てられてしまう余分な値をつかまえることができる。
+
+#### 構造体を定義するにはdefstructコマンドを使う
+```
+> (defstruct person
+             name
+             age
+             waist-size
+             favorite-color)
+
+```
+
+```
+> (defparameter *bob* (make-person :name "Bob"
+                                   :age 35
+                                   :waist-size 32
+                                   :favorite-color "blue"))
+> *bob*
+#S(PERSON :NAME "Bob" :AGE 35 :WAIST-SIZE 32 :FAVORITE-COLOR "blue")
+> (person-age *bob*)
+35
+> (setf (person-age *bob*) 36)
+```
+
+#### シーケンス関数とは、データ型、リスト、配列、文字列を統一的に扱うことができる。
+```
+length 長さを調べる
+find-if 与えた述語を満たす最初の要素を見つける
+count 特定の要素がいくつシーケンス中にあるかを数える
+position 特定の要素がシーケンスのどの位置にあるか教える
+some シーケンス中に条件を満たす要素が最低ひとつはあるか調べる
+every シーケンス中の要素全てが条件を満たすか調べる
+```
+
+#### reduceでリスト中の要素すべてを足し合わせる
+```
+> (reduce (lambda (best item)
+            (if (and (evenp item) (> item best))
+                item
+                best))
+            '(7 4 6 5 2)
+            :initial-value 0)
 ```
