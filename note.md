@@ -663,3 +663,31 @@ every シーケンス中の要素全てが条件を満たすか調べる
 (#\t #\h #\i #\S #\Space #\i #\S #\Space #\a #\Space #\S #\t #\r #\i #\n #\g)
 ```
 
+#### subseq関数は始点と終点を指定してシーケンスの一部分を取り出すのに使える
+```
+> (subseq "america" 2 6)
+"eric"
+```
+
+#### sort関数は任意の比較関数を渡してシーケンスをソートする。
+```
+> (sort '(5 8 2 4 9  3 6) #'<)
+(2 3 4 5 6 8 9)
+```
+
+#### Common Lispには、ある変数が特定の型のデータを持っているかを調べる関数が揃っている。
+```
+arrayp, characterp, consp, functionp, hash-table-p, listp, stringp, symbolp
+```
+
+#### Common Lispはそれぞれの型に特化した複数の関数を同じ名前で定義できる、defmethodコマンドを備えている。
+```
+> (defmethod add ((a number) (b number))
+    (+ a b))
+> (defmethod add ((a list) (b list))
+    (append a b))
+```
+
+
+
+
