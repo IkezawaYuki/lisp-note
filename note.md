@@ -646,4 +646,20 @@ every シーケンス中の要素全てが条件を満たすか調べる
                 best))
             '(7 4 6 5 2)
             :initial-value 0)
+
+> (defun sum (lst)
+    (reduce #'+lst))
 ```
+
+#### map関数はmapcarと同じで各要素を引数に渡した関数を読んで結果を集めるというもの。mapcarがリストにしか使えないのに対して、map関数は全てのシーケンスに使える。map関数はもうひとつ、返り血としてどのシーケンスの値を返すかという引数を取る。
+```
+> (map 'list
+      (lambda (x)
+        (if (eq x #\s)
+            #\S
+            x))
+            "this is a string")
+
+(#\t #\h #\i #\S #\Space #\i #\S #\Space #\a #\Space #\S #\t #\r #\i #\n #\g)
+```
+
