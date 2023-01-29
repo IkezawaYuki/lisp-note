@@ -688,6 +688,16 @@ arrayp, characterp, consp, functionp, hash-table-p, listp, stringp, symbolp
     (append a b))
 ```
 
+#### dotimesコマンドは変数名と数値nを受け取り、本体にあるコードをn回繰り返す
+```
+> (dotimes (i 3)
+    (fresh-line)
+    (princ i)
+    (princ ". Hatchoo!"))
+0. Hatchoo!
+1. Hatchoo!
+2. Hatchoo!
+```
 
 
 
