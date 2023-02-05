@@ -116,3 +116,61 @@
                        (princ ") ")
                        (monster-show m))))
           *monsters*)))
+
+(defstruct monster (health (randval 10)))
+
+(defmethod monster-hit (m x)
+  (decf (monster-health m) x)
+  (if (monster-dead m)
+      (progn (princ "You killed the ")
+             (princ (type-of m))
+             (princ "! "))
+      (progn (princ "You hit the ")
+             (princ (type-of m))
+             (princ x)
+             (princ " health points! "))))
+
+(defmethod monster-show (m)
+  (princ "A fierce ")
+  (princ (type-of m)))
+
+(defmethod monster-attack (m))
+
+(defstruct (orc (:include monster)) (club-level (randval 8)))
+(push #'make-orc *monster-builders*)
+
+(defmethod monster-show ((m orc))
+  (princ "A wicked orc with a level ")
+  (princ (orc-club-level m))
+  (princ " club"))
+
+(defmethod monster-attack ((m orc))
+  (let ((x (randval (orc-club-level m))))
+    (princ "An orc swings his club at you and knocks off ")
+    (princ x)
+    (princ " of your health points. ")
+    (decf *player-health* x)))
+
+(defstruct (hydra (:include monster)))
+(push #'make-hydra *monster-builders*)
+
+(defmethod monster-show ((m hydra))
+  (princ "A malicious hydra with ")
+  (princ (monster-health m))
+  (princ " heads."))
+
+(defmethod monster-hit ((m hydra) x)
+  (decf (monster-health m) x)
+  (if (monster-dead m)
+      (princ "The corpse of the fully decapitated and decapacitated hydra falls  to the floor!")
+      (progn  (princ "You lop off")
+              (princ x)
+              (princ " of the hydra's heads! "))))
+
+(defmethod monster-attack ((m hydra))
+  (let ((x (randval (ash (monster-health m) -1))))
+  (princ "A hydra attacks you with ")
+  (princ " of its heads! It also grows back one more head! ")
+  (incf (monster-health m))
+  (decf *player-health* x)))
+
