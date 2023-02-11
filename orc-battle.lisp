@@ -174,3 +174,10 @@
   (incf (monster-health m))
   (decf *player-health* x)))
 
+(defstruct (slime-mold (:include monster)) (sliminess (randval 5)))
+(push #'make-slime-mold *monster-builders*)
+
+(defmethod monster-show ((m slime-mold))
+  (princ "A slime mold with a sliminess of ")
+  (princ (slime-mold-sliminess m)))
+
