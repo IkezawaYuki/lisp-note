@@ -7,15 +7,6 @@
 (defparameter *monster-num* 12)
 
 
-(defun orc-battle ()
-  (init-monsters)
-  (init-player)
-  (game-loop)
-  (when (palyer-dead)
-    (princ "You have been killed. Game Over."))
-  (when (monsters-dead)
-    (princ "Congratulations! You have vanquished all of your foes.")))
-
 (defun game-loop ()
   (unless (or (palyer-dead) (monsters-dead))
     (show-palyer)
@@ -181,3 +172,37 @@
   (princ "A slime mold with a sliminess of ")
   (princ (slime-mold-sliminess m)))
 
+(defmethod monster-attack ((m slime-mold))
+  (let ((x  (randval (slime-mold-sliminess m))))
+       (princ "A slime mold wraps around your legs and decreases your agility by")
+       (princ x)
+       (princ "! ")
+       (decf *player-agility* x)
+       (when (zerop (random 2))
+          (princ "It also squirts in your face, taking away a health point! ")
+          (decf *player-health*))))
+
+(defstruct (brigand (:include monster)))
+(push #'make-brigand *monster-builders*)
+
+(defmethod monster-attack ((m brigand))
+  (let ((x (max *player-health* *player-agility* *player-strength)))
+    (cond ((= x *player-health*)
+           (princ "A brigand hits you with his silingshot, taking off 2 health points! ")
+           (decf *player-health* 2))
+          ((= x *player-agility*)
+           (princ "A brigand catches your leg with his whip, taking off 2 agility points! ")
+           (decf *player-agility* 2))
+          ((= x *player-strength*)
+           (princ "A brigand cuts your arm with his whip, taking off 2 strength points! ")
+           (decf *player-strength* 2)))))
+
+
+(defun orc-battle ()
+  (init-monsters)
+  (init-player)
+  (game-loop)
+  (when (palyer-dead)
+    (princ "You have been killed. Game Over."))
+  (when (monsters-dead)
+    (princ "Congratulations! You have vanquished all of your foes.")))

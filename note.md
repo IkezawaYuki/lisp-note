@@ -699,5 +699,12 @@ arrayp, characterp, consp, functionp, hash-table-p, listp, stringp, symbolp
 2. Hatchoo!
 ```
 
+#### loopマクロを使うことで、ループが使える
+```
+> (loop for i
+        below 5
+        sum i)
 
+```
 
+#### forは、ある範囲の値を移動してゆく変数を宣言する
