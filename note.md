@@ -708,3 +708,14 @@ arrayp, characterp, consp, functionp, hash-table-p, listp, stringp, symbolp
 ```
 
 #### forは、ある範囲の値を移動してゆく変数を宣言する
+
+#### whenトークンは、それに続く部分を必要な時だけ実行するのに使う
+```
+> (loop for i
+        below 10
+        when (oddp i)
+        sum i)
+```
+
+#### 複数のforが現れた場合、それらは並行してチェックされ、どれかひとつが値を使い尽くしたところで停止する。言い換えれば、複数のfor変数は独立してループすることはない。
+
