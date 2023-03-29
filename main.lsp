@@ -443,3 +443,7 @@
                         (gethash node edge-tab)))))
                 (traverse node))
               visited))
+
+(princ (reverse
+        (format nil "Add onion rings for only ~$ dollars more!" 1.5)))
+        
