@@ -446,4 +446,37 @@
 
 (princ (reverse
         (format nil "Add onion rings for only ~$ dollars more!" 1.5)))
-        
+
+(defun random-animal()
+  (nth (random 5) '("dog" "tick" "tiger" "walrus" "kangaroo")))
+
+(loop repeat 10
+  do (format t "~5t~a ~15t~a ~25t~a~%"
+        (random-animal)
+        (random-animal)
+        (random-animal)))
+
+(format t "|~{~<|~%|~,33:;~2d ~>~}|" (loop for x below 100 collect x))
+
+(output-stream-p *standard-output*)
+
+(write-char #\x *standard-output*)
+
+(input-stream-p *standard-input*)
+
+(read-char *standard-input*)
+
+(with-open-file (my-stream "data.txt" :direction :output)
+  (print "my data" my-stream))
+
+(with-open-file (my-stream "data.txt" :direction :input)
+  (read my-stream))
+
+(let ((animal-noises '((dog . woof)
+                       (cat . meow))))
+  (with-open-file (my-stream "animal-noises.txt" :direction :output)
+    (print animal-noises my-stream)))
+
+(with-open-file (my-stream "animal-noises.txt" :direction :input)
+  (read my-stream))
+
