@@ -480,3 +480,16 @@
 (with-open-file (my-stream "animal-noises.txt" :direction :input)
   (read my-stream))
 
+(with-open-file (my-stream "data.txt" :direction :output :if-exists :error)
+  (print "my data" my-stream))
+
+(with-open-file (my-stream "data.txt" :direction :output
+                                      :if-exists :supersede)
+  (print "my data" my-stream))
+
+(defparameter my-socket (socket-server 4321))
+
+(defparameter my-stream (socket-accept my-socket))
+
+(defparameter my-stream (socket-connect 4321 "127.0.0.1"))
+
