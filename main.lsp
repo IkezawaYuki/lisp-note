@@ -493,3 +493,20 @@
 
 (defparameter my-stream (socket-connect 4321 "127.0.0.1"))
 
+(close my-stream)
+
+(defparameter foo (make-string-output-stream))
+(princ "This will go into foo. " foo)
+(princ "This will go also go into foo." foo)
+
+(define-condition foo()()
+  (:report (lambda (condition stream)
+            (princ "Stop FOOing around, numbskull!" stream))))
+
+(defun bad-function ()
+  (error 'foo))
+
+(handler-case (bad-function)
+  (foo () "somebody signaled foo!")
+  (bar () "somebody signaled bar!"))
+
