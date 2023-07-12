@@ -767,3 +767,5 @@ arrayp, characterp, consp, functionp, hash-table-p, listp, stringp, symbolp
 
 #### ソケットストリームを使えば、ネットワークを介してプログラム同士が通信できる。ソケットストリームを作るには、接続したいプログラムがそれぞれソケットをオープンし、その間でコネクションを確立する。
 
+
+#### unwind-protectコマンドはCommonLispコンパイラに「このコードだけは何があっても実行してくれ」と伝えるもの
